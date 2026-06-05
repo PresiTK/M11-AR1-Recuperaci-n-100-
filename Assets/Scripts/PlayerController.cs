@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour
 
     }
     void Update()
-    {        
-
+    {
+        Vector3 moveVec = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        transform.position += moveVec * speed * Time.deltaTime;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(target.position - transform.position), speedRotation * Time.deltaTime);
     }
 }

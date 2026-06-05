@@ -20,6 +20,21 @@ public class RaycastGun : MonoBehaviour
 
             line.SetPosition(0, transform.position);
             line.SetPosition(1, transform.position + transform.forward * 1000);
+            Shoot();
+
+        }
+    }
+    void Shoot()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+            if (hitObject.GetComponent("EnemyController") as EnemyController != null)
+            {
+                EnemyController enemy = hitObject.GetComponent<EnemyController>();
+                enemy.Kill();
+            }
         }
     }
 }
