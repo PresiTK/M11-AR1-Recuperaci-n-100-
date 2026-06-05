@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public List<GameObject> EnemiesList = new List<GameObject>();
     private void Awake()
     {
-        //Lo hago instanciable
         if (instance == null)
         {
             instance = this;
@@ -28,15 +27,20 @@ public class GameManager : MonoBehaviour
         if (EnemiesList.Count <= 0)
         {
 
-            for (int i = 0; i <= EnemyCount; i++)
+            for (int i = 0; i < EnemyCount; i++)
             {
                 Transform spawnPos = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
                 GameObject enemy = Instantiate(EnemyPrefab, spawnPos);
                 EnemiesList.Add(enemy);
+                if(i+1 == EnemyCount)
+                {
+                    Debug.Log("i Value:" +(i + 1));
+                }
             }
             
             EnemyAmount = EnemyAmount * 1.2f;
             EnemyCount = (int) EnemyAmount;
+            Debug.Log("EnemyCount:"+EnemyCount);
         }
     }
 
